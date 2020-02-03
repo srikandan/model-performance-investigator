@@ -2,7 +2,7 @@
 
 ## Short Description
         Model Performance Investigator is used to analyse the performance Machine Learning and
-    Deep learning models. It gives the user basic idea how the model perfomance on given data.
+    Deep learning models. It gives the user basic idea how the model performance on given data.
     So that user can start work on the right model.
     
 ## Installation
