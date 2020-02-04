@@ -6,7 +6,7 @@
     So that user can start work on the right model.
     
 ## Installation
-    pip install model-performance-analyzer
+    pip install model-performance-investigator
     
 ## How to use ?
     
