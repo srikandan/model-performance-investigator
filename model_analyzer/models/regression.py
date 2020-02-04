@@ -1,10 +1,10 @@
-__author__ = 'Srikandan'
+__author__ = 'Srikandan Raju, Sathish Anandha'
 __copyright__ = 'Copyright (C) 2007 Free Software Foundation'
 __license__ = 'GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007'
-__version__ = '1.0.1'
-__maintainer__ = 'Srikandan'
+__version__ = '1.0.2'
+__maintainer__ = 'Srikandan Raju, Sathish Anandha'
 
-
+# main_regression is the Class
 class main_regression(object):
     
     # Importing required packages and assigning it to global variables
@@ -28,15 +28,18 @@ class main_regression(object):
             e = 'Kindly install or update Packages \n' + str(e)
             return e
         
-    # Regression Models
-    def regression(data, alg_type, score_type, tune_param, reg_class):
+    # regression function identifies the Model Type
+    def regression(prob_type, data, alg_type, score_type, tune_param, reg_class):
+        global prob
+        prob = prob_type 
+        
         try:
             import_status = reg_class.import_required_packages()
-        
-            main_dataframe = pd.DataFrame(columns=['model', 'score_type', 'score',
-                                                   'gridsearch_cv_best_score',
-                                                   'gridsearch_cv_best_param', 
-                                                   'error'])
+            
+            main_dataframe = pd.DataFrame(columns=['Model', 'Score_Type',
+                                                   'Best_Score',
+                                                   'Best_Parameter', 
+                                                   'Error'])
             result_data = []
             list_data = []
             list_data = data.copy()
@@ -65,12 +68,11 @@ class main_regression(object):
                                                                         tune_param, reg_class)
                     else:
                         output = [{
-                            'model':model, 
-                            'score_type':'',
-                            'score': '',
-                            'gridsearch_cv_best_score':'',
-                            'gridsearch_cv_best_param':'',
-                            'error': 'Not a Valid Model'
+                            'Model':model, 
+                            'Score_Type':'',
+                            'Best_Score':'',
+                            'Best_Parameter':'',
+                            'Error': 'Not a Valid Model'
                             }]
                     
                     if isinstance(output, list):
@@ -262,35 +264,31 @@ class main_regression(object):
         except Exception as e:
             return e
         
-    
+    # get_grid_score function calls the gridsearch_cv to get the Grid Search Result
     def get_grid_score(score_types, model, tune_param, data, model_name):
         try:
             score_list = []
             for score_type in score_types:
-                if score_type == 'r2_score':
-                    score_type = 'r2'
-                        
-                score, best_score, best_param = grid_class.gridsearch_cv(model, 
-                                                                             tune_param, 
-                                                                             score_type, data)
+                best_score, best_param = grid_class.gridsearch_cv(model, tune_param, 
+                                                                             score_type, 
+                                                                             data,
+                                                                             prob)
                 output = {
-                            "model"                    :   model_name,
-                            "score_type"               :   score_type,
-                            "score"                    :   score,
-                            "gridsearch_cv_best_score" :   best_score,
-                            "gridsearch_cv_best_param" :   best_param,
-                            "error"                    :   ''
+                            "Model"                    :   model_name,
+                            "Score_Type"               :   score_type,
+                            "Best_Score"               :   best_score,
+                            "Best_Parameter"           :   best_param,
+                            "Error"                    :   ''
                         }
                 score_list.append(output)
             return score_list   
         except Exception as e:
             error = [{
-                'model':model, 
-                'score_type':'',
-                'score': '',
-                'gridsearch_cv_best_score':'',
-                'gridsearch_cv_best_param':'',
-                'error': str(e)
+                'Model':model, 
+                'Score_Type':'',
+                'Best_Score':'',
+                'Best_Parameter':'',
+                'Error': str(e)
                 }]
             return error
         

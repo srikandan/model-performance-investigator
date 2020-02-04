@@ -1,17 +1,25 @@
+__author__  = 'Srikandan Raju, Sathish Anandha'
+__copyright__ = 'Copyright (C) 2007 Free Software Foundation'
+__license__ = 'GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007'
+__version__ = '1.0.2'
+__maintainer__ = 'Srikandan Raju, Sathish Anandha'
 
-
+# Importing Required Packages
 def import_required_packages():
     try:
         global reg_class
+        global classify_class
+        
         from model_analyzer.models import regression as reg_class
-            
+        from model_analyzer.models import classification as classify_class
+        
         return 'imported'
     except Exception as  e:
         e = 'Kindly install or update Packages \n' + str(e)
         return e
         
-# Main method
-def predector(prob_type, data, alg_type=['linear'], score_type=['r2'], 
+# predector is the Main function of this Package
+def predector(prob_type, data, alg_type='default', score_type='default', 
               tune_param='default'):
     import_status = import_required_packages()
     
@@ -20,13 +28,9 @@ def predector(prob_type, data, alg_type=['linear'], score_type=['r2'],
             prob_type = str(prob_type).lower()
             
             if prob_type == 'regression':
-                output = regression(data, alg_type, score_type, tune_param)
-            # elif prob_type == 'classification':
-            #     classification(data, opt_param)
-            # elif prob_type == 'clustering':
-            #     clustering(data, opt_param)
-            # elif prob_type == 'nltk':
-            #     natural_language(data, opt_param)
+                output = regression(prob_type, data, alg_type, score_type, tune_param)
+            elif prob_type == 'classification':
+                output = classification(prob_type, data, alg_type, score_type, tune_param)
             else:
                 output = 'Not a valid Machine Learning Techniques'
             return output
@@ -35,12 +39,30 @@ def predector(prob_type, data, alg_type=['linear'], score_type=['r2'],
     except Exception as e :
         return e
 
- 
-def regression(data, alg_type, score_type, tune_param):
+# regression function call the regression class
+def regression(prob_type, data, alg_type, score_type, tune_param):
     reg_main = reg_class.main_regression
+    if alg_type == 'default':
+        alg_type = ['linear']
+    if score_type == 'default':
+        score_type = ['r2']
     try:
-        output = reg_main.regression(data, alg_type, score_type, tune_param, 
+        output = reg_main.regression(prob_type, data, alg_type, score_type, tune_param, 
                                      reg_main)
+        return output
+    except Exception as e :
+        return e
+
+# classification function call the classification class
+def classification(prob_type, data, alg_type, score_type, tune_param):
+    class_main = classify_class.main_classification
+    if alg_type == 'default':
+        alg_type = ['logistic']
+    if score_type == 'default':
+        score_type = ['confusion_matrix']
+    try:
+        output = class_main.classification(prob_type, data, alg_type, score_type, tune_param, 
+                                     class_main)
         return output
     except Exception as e :
         return e

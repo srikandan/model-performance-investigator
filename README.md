@@ -19,7 +19,8 @@
                   score_type=['r2'], tune_param='default')
 
 ## Parameters ?
-    1. 'regression' -> Current Version uses only regression type problems. It is mandatory.
+    1. 'regression' -> Current Version supports Regression and Classification 
+                       type problems. It is mandatory.
     
     2. data -> data must contain "train_X, train_y, text_x". train_X, train_y is for fitting
                the model and test_x is for predicting. It is mandatory.
@@ -43,17 +44,27 @@
     4. score_type -> Type of the score. It is optional parameter. Provide the parameter
                      values in list.   
                      Default is "r2" algorithm.
-                   
-                   Currently it Supports:
-                   * r2
-                   * explained_variance
-                   * max_error
-                   * neg_mean_absolute_error
-                   * neg_mean_squared_error
-                   * neg_mean_squared_log_error
-                   * neg_median_absolute_error
-                   * neg_mean_poisson_deviance
-                   * neg_mean_gamma_deviance
+                    1. Regression:
+                       It Supports:
+                        * r2
+                        * explained_variance
+                        * max_error
+                        * neg_mean_absolute_error
+                        * neg_mean_squared_error
+                        * neg_mean_squared_log_error
+                        * neg_median_absolute_error
+                        * neg_mean_poisson_deviance
+                        * neg_mean_gamma_deviance
+                       
+                    2. Classification:
+                        It Supports:
+                        * jaccard
+                        * f1
+                        * neg_log_loss
+                        * roc_auc
+                        * accuracy
+                        * balanced_accuracy
+                        * average_precision
             
     5. tune_param -> Tuning Parameter for the model. It is optional. By Default parameter 
                      this package uses some basic parameters for each models.

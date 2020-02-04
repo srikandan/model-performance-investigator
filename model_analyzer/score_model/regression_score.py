@@ -1,10 +1,10 @@
-__author__ = 'Srikandan'
+__author__ = 'Srikandan Raju, Sathish Anandha'
 __copyright__ = 'Copyright (C) 2007 Free Software Foundation'
 __license__ = 'GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007'
-__version__ = '1.0.1'
-__maintainer__ = 'Srikandan'
+__version__ = '1.0.2'
+__maintainer__ = 'Srikandan Raju, Sathish Anandha'
 
-
+# Importing required packages
 def import_required_package():
     try:
         global r2_score
@@ -32,17 +32,11 @@ def import_required_package():
         e = 'Kindly install or update Packages \n' + str(e)
         return e
 
+# get_model_score function calculates the Score
 def get_model_score(score_type, data, grid_predict):
     output = import_required_package()
     
     if output == 'imported':
-        return generate_score(score_type, data, grid_predict)
-    else:
-        return output
-    
-    
-def generate_score(score_type, data, grid_predict):
-    try:
         if score_type == 'r2':
             r2 = r2_score(data[1], grid_predict)
             adj_r2 = 1 - ((1 - r2) * ((data[0].shape[0] - 1) / 
@@ -95,5 +89,5 @@ def generate_score(score_type, data, grid_predict):
             score = {score_type: 'Not a valid ScoreType'}
         
         return score
-    except Exception as e:
-        return e
+    else:
+        return output

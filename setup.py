@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="model-performance-investigator",
-    version="1.0.1",
-    author="Srikandan",
-    author_email="kandan.sri15@gmail.com",
-    description="Package give idea of a various models based on given data",
+    version="1.0.2",
+    author="Srikandan Raju, Sathish Anandha",
+    author_email="kandan.sri15@gmail.com, sathishvp7@gmail.com",
+    description="Package give idea of a models performance based on given data",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/srikandan/model-evaluation",
@@ -21,8 +21,7 @@ setuptools.setup(
     install_requires=[
           'tensorflow', 'keras', 'mxnet',
           'scikit-learn', 'numpy', 'pandas', 
-          'statsmodels', 'matplotlib', 'xgboost',
-          'scipy'
+          'statsmodels', 'xgboost', 'scipy'
       ],
     python_requires='>=3.6',
 )
