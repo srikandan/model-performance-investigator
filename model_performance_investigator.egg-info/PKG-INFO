@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: model-performance-investigator
-Version: 1.0.3.1
+Version: 1.0.3
 Summary: Package give idea of a models performance based on given data
 Home-page: https://github.com/srikandan/model-evaluation
 Author: Srikandan Raju, Sathish Anandha
