@@ -15,6 +15,7 @@ class MLPredictor(object):
             
             from model_analyzer.models import regression as reg_class
             from model_analyzer.models import classification as classify_class
+            from model_analyzer.plot import regression_plot as reg_plt
             
             return 'imported'
         except Exception as  e:
