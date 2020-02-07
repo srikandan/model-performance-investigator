@@ -1,13 +1,13 @@
 __author__ = 'Srikandan Raju, Sathish Anandha'
 __copyright__ = 'Copyright (C) 2007 Free Software Foundation'
 __license__ = 'GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 __maintainer__ = 'Srikandan Raju, Sathish Anandha'
 
 # main_regression is the Class
-class main_regression(object):
+class MainRegression(object):
     
-    # Importing required packages and assigning it to global variables
+    # Importing required packages
     def import_required_packages():
         try:
             global pd
@@ -16,7 +16,6 @@ class main_regression(object):
             global grid_class
             global mk_pipeline
             
-            # Package importing
             import pandas as pd
             import numpy as np
             from sklearn.pipeline import make_pipeline as mk_pipeline
@@ -25,26 +24,34 @@ class main_regression(object):
             
             return 'imported'
         except Exception as  e:
-            e = 'Kindly install or update Packages \n' + str(e)
+            e = 'Kindly install or update Packages \n ' + str(e)
             return e
         
     # regression function identifies the Model Type
-    def regression(prob_type, data, alg_type, score_type, tune_param, reg_class):
+    def regression(prob_type, data, alg_type, score_type, tune_param, reg_class, 
+                   set_plot):
         global prob
-        prob = prob_type 
+        global set_plotting
+        global current_model
+        
+        prob = prob_type
+        set_plotting = set_plot
         
         try:
             import_status = reg_class.import_required_packages()
             
-            main_dataframe = pd.DataFrame(columns=['Model', 'Score_Type',
+            main_dataframe = pd.DataFrame(columns=['Model', 'Score_Type', 
+                                                   'Predicted_Score',
                                                    'Best_Score',
-                                                   'Best_Parameter', 
+                                                   'Best_Parameter',
+                                                   'Plot_Status',
                                                    'Error'])
             result_data = []
             list_data = []
             list_data = data.copy()
             if import_status == 'imported':
                 for model in  alg_type:
+                    current_model = model
                     if model == 'linear':
                         output = reg_class.linear_regression(list_data, score_type, 
                                                                         tune_param, reg_class)
@@ -70,8 +77,10 @@ class main_regression(object):
                         output = [{
                             'Model':model, 
                             'Score_Type':'',
+                            'Predicted_Score':'',
                             'Best_Score':'',
                             'Best_Parameter':'',
+                            'Plot_Status':'',
                             'Error': 'Not a Valid Model'
                             }]
                     
@@ -94,10 +103,10 @@ class main_regression(object):
             lin_mod = LinearRegression()
             
             grid_tune_param = {
-                              "fit_intercept"       : [True, False],
-                              "normalize"           : [True, False],
-                              "copy_X"              : [True, False],
-                              "n_jobs"              : [ -1]
+                              'fit_intercept'       : [True, False],
+                              'normalize'           : [True, False],
+                              'copy_X'              : [True, False],
+                              'n_jobs'              : [ -1]
                             }
             if tune_param == 'default':
                 tune_param = grid_tune_param
@@ -118,12 +127,12 @@ class main_regression(object):
             from sklearn.preprocessing import PolynomialFeatures
             
             grid_tune_param = {
-                              "polynomialfeatures__degree"  : np.arange(2),
-                              "polynomialfeatures__interaction_only"    : [True, False],
-                              "polynomialfeatures__include_bias"        : [True, False],
-                              "polynomialfeatures__order"               : ['C', 'F'],
-                              "linearregression__fit_intercept": [True, False], 
-                              "linearregression__normalize": [True, False]
+                              'polynomialfeatures__degree'  : np.arange(2),
+                              'polynomialfeatures__interaction_only'    : [True, False],
+                              'polynomialfeatures__include_bias'        : [True, False],
+                              'polynomialfeatures__order'               : ['C', 'F'],
+                              'linearregression__fit_intercept': [True, False], 
+                              'linearregression__normalize': [True, False]
                             }                
             if tune_param == 'default':
                 tune_param = grid_tune_param
@@ -148,7 +157,7 @@ class main_regression(object):
             reg_mod = Ridge()
             
             grid_tune_param = {
-                              "alpha":[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
+                              'alpha':[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
                                        1, 5, 10, 15, 20, 40, 50,
                                        85, 100, 300, 500, 1000
                                        ]
@@ -172,7 +181,7 @@ class main_regression(object):
             lasso_mod = Lasso()
             
             grid_tune_param = {
-                              "alpha":[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
+                              'alpha':[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
                                        1, 5, 10, 15, 20, 40, 50,
                                        85, 100, 300, 500, 1000
                                        ]
@@ -196,7 +205,7 @@ class main_regression(object):
             el_mod = ElasticNet()
             
             grid_tune_param = {
-                              "alpha":[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
+                              'alpha':[1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 
                                        1, 5, 10, 15, 20, 40, 50,
                                        85, 100, 300, 500, 1000
                                        ]
@@ -221,11 +230,11 @@ class main_regression(object):
             rand_mod = RandomForestRegressor()
             
             grid_tune_param = {
-                      "n_estimators"        : [300, 500, 1000],
-                      "max_features"        : ['sqrt', 'log2'],
-                      "max_depth"           : [2, 8],
-                      "min_samples_leaf"    : [ 2, 8],
-                      "min_samples_split"   : [ 2, 8]
+                      'n_estimators'        : [300, 500, 1000],
+                      'max_features'        : ['sqrt', 'log2'],
+                      'max_depth'           : [2, 8],
+                      'min_samples_leaf'    : [ 2, 8],
+                      'min_samples_split'   : [ 2, 8]
                     }
             if tune_param == 'default':
                 tune_param = grid_tune_param
@@ -246,11 +255,11 @@ class main_regression(object):
             xgb_mod = XGBRegressor()
             
             grid_tune_param = {
-                          "learning_rate"    : [0.05, 0.10] ,
-                          "min_child_weight" : [ 1, 3],
-                          "gamma"            : [ 0.0, 0.1],
-                          "colsample_bytree" : [ 0.3, 0.4],
-                          "n_estimators"     : [300, 500, 100]
+                          'learning_rate'    : [0.05, 0.10] ,
+                          'min_child_weight' : [ 1, 3],
+                          'gamma'            : [ 0.0, 0.1],
+                          'colsample_bytree' : [ 0.3, 0.4],
+                          'n_estimators'     : [300, 500, 100]
                     }
             if tune_param == 'default':
                 tune_param = grid_tune_param
@@ -269,16 +278,21 @@ class main_regression(object):
         try:
             score_list = []
             for score_type in score_types:
-                best_score, best_param = grid_class.gridsearch_cv(model, tune_param, 
-                                                                             score_type, 
-                                                                             data,
-                                                                             prob)
+                score, best_score, best_param, plot_status = grid_class.gridsearch_cv(model, 
+                                                                  tune_param,
+                                                                  score_type,
+                                                                  data,
+                                                                  prob,
+                                                                  set_plotting,
+                                                                  current_model)
                 output = {
-                            "Model"                    :   model_name,
-                            "Score_Type"               :   score_type,
-                            "Best_Score"               :   best_score,
-                            "Best_Parameter"           :   best_param,
-                            "Error"                    :   ''
+                            'Model'                    :   model_name,
+                            'Score_Type'               :   score_type,
+                            'Predicted_Score'          :   score,
+                            'Best_Score'               :   best_score,
+                            'Best_Parameter'           :   best_param,
+                            'Plot_Status'              :   plot_status,
+                            'Error'                    :   ''
                         }
                 score_list.append(output)
             return score_list   
@@ -286,8 +300,10 @@ class main_regression(object):
             error = [{
                 'Model':model, 
                 'Score_Type':'',
+                'Predicted_Score':'',
                 'Best_Score':'',
                 'Best_Parameter':'',
+                'Plot_Status':'',
                 'Error': str(e)
                 }]
             return error

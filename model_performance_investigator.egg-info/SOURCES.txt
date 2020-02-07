@@ -8,6 +8,8 @@ model_analyzer/gridsearch_cv/gridsearch_model.py
 model_analyzer/models/__init__.py
 model_analyzer/models/classification.py
 model_analyzer/models/regression.py
+model_analyzer/plot/__init__.py
+model_analyzer/plot/regression_plot.py
 model_analyzer/score_model/__init__.py
 model_analyzer/score_model/classification_score.py
 model_analyzer/score_model/regression_score.py
