@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: model-performance-investigator
-Version: 1.0.3
+Version: 1.0.4
 Summary: Package give idea of a models performance based on given data
 Home-page: https://github.com/srikandan/model-evaluation
 Author: Srikandan Raju, Sathish Anandha
@@ -26,7 +26,7 @@ Description: # Model Performance Investigator
         ## How to use ?
             
             * Import the package.
-                from model_analyzer import ml_models as ml
+                from model_analyzer.ml_models import MLPredictor as ml
             
             * Call the required function, assign it to a variable and run.
                           
