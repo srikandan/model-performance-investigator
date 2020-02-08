@@ -18,7 +18,7 @@
 ## How to use ?
     
     * Import the package.
-        from model_analyzer import ml_models as ml
+        from model_analyzer.ml_models import MLPredictor as ml
     
     * Call the required function, assign it to a variable and run.
                   
