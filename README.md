@@ -47,13 +47,13 @@
                        FORMAT :
                            prob_type = ['regression']
         
-        * data -> data must contain "train_X, train_y, text_x". train_X, train_y is for fitting
+        * data -> data must contain "train_X, train_y, test_x". train_X, train_y is for fitting
                    the model and test_x is for predicting. It is mandatory.
                    
                    TYPE : List
                    
                    FORMAT :
-                       data = [train_X, train_y, text_x]
+                       data = [train_X, train_y, test_x]
                    
         * alg_type -> Type of the algorithm. It is optional parameter. Provide the parameter
                       values in list.  
@@ -161,7 +161,7 @@
     EXAMPLE :
         from model_analyzer.ml_models import MLPredictor as ml
         
-        data = [train_X, train_y, text_x]
+        data = [train_X, train_y, test_x]
         new_out = ml.predector('regression', data, alg_type=['linear','lasso'], 
                   score_type=['r2'], tune_param='default', set_plot=True)
                        

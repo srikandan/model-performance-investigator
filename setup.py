@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="model-performance-investigator",
-    version="1.0.4",
+    version="1.0.5",
     author="Srikandan Raju, Sathish Anandha",
     author_email="kandan.sri15@gmail.com, sathishvp7@gmail.com",
     description="Package give idea of a models performance based on given data",
