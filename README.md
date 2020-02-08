@@ -3,10 +3,10 @@
 
 ## Short Description
 
-        Model Performance Investigator is used to analyse the performance Machine Learning and
-    Deep learning models. It gives the user basic idea how the model performance on given data.
+        Model Performance Investigator is used to analyse the performance of Machine Learning and
+    Deep learning models. It gives the user, basic idea how the model performance on given data.
     So that user can start work on the right model.
-        Current Version supports Regression and Classification type problems with 
+        Current Version supports Regression and Classification type of problems with 
     Visualization support.
     
     
@@ -67,7 +67,7 @@
                              ---------------------------|------------------------
                              Linear Regression          | linear
                              Polynomial Regression      | polynomial
-                             Redig Regression           | ridge
+                             Redige Regression          | ridge
                              Lasso Regression           | lasso
                              ElasticNet Regression      | elasticnet
                              Random Forest Regression   | random_forest_regressor
@@ -81,7 +81,6 @@
                              Random Forest              | random_forest
                              Naive Bayes                | naive_bayes
                              SVC                        | svc
-                             Random Forest Regression   | random_forest_regressor
                              XGB Classifier             | xgb_classifier
                          
                      FORMAT :
@@ -119,9 +118,9 @@
                             score_type = ['explained_variance', 'neg_mean_poisson_deviance']
                             
                 
-        * tune_param -> Tuning Parameter for the model. It is optional. By Default parameter 
+        * tune_param ->  Tuning Parameters for the model. It is an optional. By Default, 
                          this package uses some basic parameters for each models.
-                         User can provide own Tuning Parameter.
+                         User can provide own Tunning Parameters.
                          
                          TYPE : List of Dict
                          
@@ -146,12 +145,12 @@
                              tune_param = {'linear': linear_tune_param, 
                                           'lasso': lasso_tune_param}
                          
-                         Note : User don't have to specify tuning parameter for all the
-                                models used in 'alg_type'. If tuning parameter is not provided
-                                then this package use default tuning parameter.
+                         Note : User don't have to specify tunning parameters for all the
+                                models used in 'alg_type'. If tunning parameters are not provided
+                                then this package use default tunning parameters.
                                 
         * set_plot -> Creates Residual Plot for regression model only.
-                      By default it is Set as True.
+                      By default, it is Set as True.
                       
                       TYPE : Boolean
                       
@@ -160,7 +159,7 @@
                     
                          
     EXAMPLE :
-        from model_analyzer import ml_models as ml
+        from model_analyzer.ml_models import MLPredictor as ml
         
         data = [train_X, train_y, text_x]
         new_out = ml.predector('regression', data, alg_type=['linear','lasso'], 
@@ -200,7 +199,7 @@
                 
                          
     EXAMPLE :
-        from model_analyzer import ml_models as ml
+        from model_analyzer.ml_models import MLPredictor as ml
         
         output = ml.draw_plot('regression', dataframe, columns =  ['ColA', 'ColB', 'ColC'],
                  plot_type='hist')
@@ -208,7 +207,7 @@
                        
 ## Project History
 
-        The project was started in 2019 by Srikandan Rajua and Sathish Anandha.
+        The project was started in 2019 by Srikandan Raju and Sathish Anandha.
         
         
 ## NOTE :
