@@ -207,7 +207,7 @@
                        
 ## Project History
 
-        The project was started in 2019 by Srikandan Raju and Sathish Anandha.
+        The project was started in 2019 by Srikandan Raju.
         
         
 ## NOTE :
